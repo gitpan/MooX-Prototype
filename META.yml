@@ -1,0 +1,24 @@
+---
+abstract: 'Prototype-based Programming'
+author:
+  - 'Al Newkirk <anewkirk@ana.io>'
+build_requires:
+  perl: v5.10.0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 5.021, CPAN::Meta::Converter version 2.142690'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: MooX-Prototype
+requires:
+  Moo: 1.006001
+  perl: v5.10.0
+resources:
+  bugtracker: https://github.com/alnewkirk/MooX-Prototype/issues
+  homepage: https://github.com/alnewkirk/MooX-Prototype
+  repository: git://github.com/alnewkirk/MooX-Prototype.git
+version: 0.01
+x_authority: cpan:AWNCORP
