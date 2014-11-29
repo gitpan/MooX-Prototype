@@ -3,6 +3,7 @@ abstract: 'Prototype-based Programming'
 author:
   - 'Al Newkirk <anewkirk@ana.io>'
 build_requires:
+  Moo: 1.006001
   perl: v5.10.0
 configure_requires:
   ExtUtils::MakeMaker: 0
@@ -18,7 +19,7 @@ requires:
   perl: v5.10.0
 resources:
   bugtracker: https://github.com/alnewkirk/MooX-Prototype/issues
-  homepage: https://github.com/alnewkirk/MooX-Prototype
+  homepage: http://metacpan.org/release/MooX-Prototype/
   repository: git://github.com/alnewkirk/MooX-Prototype.git
-version: 0.01
+version: 0.02
 x_authority: cpan:AWNCORP

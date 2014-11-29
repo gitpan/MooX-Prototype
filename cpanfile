@@ -2,6 +2,7 @@ requires "Moo" => "1.006001";
 requires "perl" => "v5.10.0";
 
 on 'test' => sub {
+  requires "Moo" => "1.006001";
   requires "perl" => "v5.10.0";
 };
 

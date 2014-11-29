@@ -1,10 +1,9 @@
 # ABSTRACT: Prototype-based Programming
 package MooX::Prototype;
 
-use Moo;
 use Carp;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 sub import {
     my $class  = shift;
@@ -20,12 +19,22 @@ sub import {
 sub build_args {
     my $left  = shift or return;
     my $right = shift or return;
+    my $data;
 
     my $hash = {%$left};
-    if ('HASH' eq ref $right) {
-        while (my($key, $val) = each %$right) {
-            my $is_hash = 'HASH' eq ref $val;
-            $hash->{$key} = $is_hash ? build_args({}, $val) : $val;
+    return $hash unless 'HASH' eq ref $right;
+
+    while (my($key, $val) = each %$right) {
+        if ('HASH' eq ref $val) {
+            $hash->{$key} = build_args({}, $val);
+        }
+        elsif ('ARRAY' eq ref  $val) {
+            $hash->{$key} = [
+                map { 'HASH' eq ref $_ ? build_args({}, $_) : $_ } @$val
+            ];
+        }
+        else {
+            $hash->{$key} = $val;
         }
     }
 
@@ -69,7 +78,9 @@ sub build_clone (@) {
     my $args = ref($class) ? {%{$class}} : {};
     build_properties(my $name = build_class($base), @_);
 
-    return $name->new($base->isa($common) ? (%{build_args($args, {@_})}) : @_);
+    return $name->new(
+        $base->isa($common) ? (%{build_args(build_args({},$args), {@_})}) : @_
+    );
 }
 
 sub build_method ($$$) {
@@ -78,6 +89,8 @@ sub build_method ($$$) {
     my $value = shift;
 
     $class = ref($class) || $class;
+    return unless 'CODE' eq ref $value;
+
     no strict 'refs';
     no warnings 'redefine';
     *{"${class}::$key"} = $value;
@@ -118,7 +131,7 @@ MooX::Prototype - Prototype-based Programming
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

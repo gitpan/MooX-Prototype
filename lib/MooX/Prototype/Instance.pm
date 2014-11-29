@@ -4,7 +4,7 @@ package MooX::Prototype::Instance;
 use Moo ();
 use Moo::Role ();
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 *package = sub {
     require MooX::Prototype::Package;
